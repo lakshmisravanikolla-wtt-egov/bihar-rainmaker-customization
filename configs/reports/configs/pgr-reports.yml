@@ -6,16 +6,19 @@ ReportDefinitions:
   sourceColumns:
   - name: citizen_mobile_app
     label: reports.rainmaker-pgr.citizen_mobile_app
-    type: number
+    type: string
     source: eg_pgr_service
+    total: false
   - name: citizen_web_app
     label: reports.rainmaker-pgr.citizen_web_app
-    type: number
+    type: string
     source: eg_pgr_service
+    total: false
   - name: counter_desktop
     label: reports.rainmaker-pgr.counter_desktop
-    type: number
+    type: string
     source: eg_pgr_service
+    total: false
   searchParams: 
   - name: tenantId
     label: reports.rainmaker-pgr.tenantId
