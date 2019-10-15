@@ -25,7 +25,7 @@ ReportDefinitions:
     type: singlevaluelist
     pattern: 'list://Wet:Wet,Dry:Dry'
     source: eg_pgr_service
-    isMandatory: true    
+    isMandatory: false    
   - name: fromDate
     label: reports.rainmaker-pgr.datefrom
     type: epoch
