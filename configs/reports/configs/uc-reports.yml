@@ -628,7 +628,7 @@ ReportDefinitions:
         type: string
         source: uc
         total: false
-      - name: servicecategory
+      - name: Businesservice
         label: reports.uc.businessdetails
         type: string
         source: uc
