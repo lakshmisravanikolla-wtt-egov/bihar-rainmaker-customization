@@ -302,8 +302,8 @@ ReportDefinitions:
         JOIN receipt_breakup ON bd.id = receipt_breakup.receiptheader
         JOIN egcl_billaccountdetail as ba ON bd.id=ba.billdetailid
         JOIN eg_user ON py.createdby::INTEGER=eg_user.id
-        WHERE  bi.status != 'Cancelled'  AND receiptnumber like 'UC%'
-        and rh.tenantid=$tenantid
+        WHERE  bi.status != 'CANCELLED'  AND bi.consumercode like 'UC%'
+        AND rh.tenantid=$tenantid
     orderby: ORDER BY receiptdate DESC
 
   - reportName: MiscReceiptStateWide
@@ -795,25 +795,22 @@ ReportDefinitions:
       - name: collectorname
         label: reports.uc.collectorname
         type: singlevaluelist
-        pattern: http://egov-hrms:8080/egov-hrms/employees/_search?tenantId=$tenantid&roles=UC_EMP|$.Employees[*].user.id|$.Employees[*].user.name
+        pattern: 
         source: uc
         wrapper: true
         isMandatory: false
         searchClause: AND eg_user.id = $collectorname::INTEGER
     query: |
         -- Use CTE to force query plan, compute & use CTE later
-        SELECT 
-          rh.payername as consumername,
-          rh.payermobile as mobilenumber,
-          To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,
-          businessdetails as servicecategory,
-          rh.totalamount as amount, 
-          eg_user.name as collectorname,
-          rh.additionaldetails->>'comment' as remarks
-        FROM egcl_receiptheader_v1 AS rh
-        JOIN egcl_receiptinstrument_v1 AS ri ON rh.id = ri.receiptheader
-        JOIN egcl_instrumentheader_v1 AS ih ON ih.id = ri.instrumentheader
-        JOIN eg_user ON rh.createdby::INTEGER=eg_user.id
-        WHERE  rh.status != 'Cancelled'  AND receiptnumber like 'MP%'
-        and rh.tenantid=$tenantid
-    orderby: ORDER BY rh.receiptdate DESC
+        select eg_user.name as collectorname,
+        py.payername as consumername, 
+        py.mobilenumber as mobilenumber,
+        bi.totalamount as TotalAmount,rh.businessservice as Businesservice,
+        To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate, 
+        rh.additionaldetails->>'comment' as remarks
+        from egcl_payment py  JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
+        JOIN egcl_bill as bi ON bi.id=rh.billid 
+        JOIN eg_user ON py.createdby::INTEGER=eg_user.id
+        where bi.status != 'CANCELLED' AND bi.consumercode LIKE '%UC%'
+        AND rh.tenantid=$tenantid
+        orderby: ORDER BY rh.receiptdate DESC;
