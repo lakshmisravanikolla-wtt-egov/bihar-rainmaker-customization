@@ -708,34 +708,36 @@ ReportDefinitions:
         -- Use CTE to force query plan, compute & use CTE later
         WITH receipt_breakup AS (
                     SELECT 
-                      receiptheader, 
+                      ba.billdetailid as receiptheader, 
                       SUM(CASE WHEN taxheadcode LIKE '%_CGST' THEN adjustedamount ELSE 0 END) as cgst, 
                       SUM(CASE WHEN taxheadcode LIKE '%_TAX' THEN adjustedamount ELSE 0 END) as tax, 
                       SUM(CASE WHEN taxheadcode LIKE '%_SGST' THEN adjustedamount ELSE 0 END) as sgst, 
                       SUM(CASE WHEN taxheadcode LIKE '%_FIELD_FEE' THEN adjustedamount ELSE 0 END) as fieldcollection            
-                    FROM egcl_receiptdetails_v1 as rd
-                    INNER JOIN egcl_receiptheader_v1 as rh on rh.id = rd.receiptheader
-                    GROUP BY rd.receiptheader
+                    FROM egcl_billaccountdetail as ba
+                    INNER JOIN egcl_billdetial as bd on bd.id=ba.billdetailid
+                    GROUP BY ba.billdetailid
         )
-        SELECT 
+        SELECT DISTINCT
           rh.tenantid as ulb,
-          rh.receiptnumber as receiptnumber,
+          bi.consumercode as receiptnumber,
           To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,
-          businessdetails as servicecategory,
-          receipt_breakup.*,  
-          amount as totalamount, 
-          instrumenttype as paymentmode,
-          (case when instrumenttype like 'Cash' then '' else  transactionnumber end) as ddorchequenumber,
-          (case when instrumenttype like 'DD' or instrumenttype like 'Cheque' then To_char((To_timestamp(ih.transactiondate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') else '' end) as ddchequedate,
-          eg_user.name as collectorname
-        FROM egcl_receiptheader_v1 AS rh
-        JOIN egcl_receiptinstrument_v1 AS ri ON rh.id = ri.receiptheader
-        JOIN egcl_instrumentheader_v1 AS ih ON ih.id = ri.instrumentheader
-        JOIN receipt_breakup ON rh.id = receipt_breakup.receiptheader
-        JOIN eg_user ON rh.createdby::INTEGER=eg_user.id
-        WHERE  rh.status = 'Cancelled'  AND receiptnumber like 'MP%'
-        and rh.tenantid=$tenantid
-    orderby: ORDER BY rh.receiptdate DESC
+          rh.businessservice as Businesservice,
+          receipt_breakup.*,
+          (case when py.paymentmode like 'CASH' then '' else  transactionnumber end) as ddorchequenumber,
+          bi.totalamount as TotalAmount,
+          eg_user.name as collectorname,
+          py.paymentmode as paymentMode,
+          bi.status as status
+        FROM egcl_payment as py
+        JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
+        JOIN egcl_bill as bi ON bi.id=rh.billid
+        JOIN egcl_billdetial as bd ON bd.billid=bi.id
+        JOIN receipt_breakup ON bd.id = receipt_breakup.receiptheader
+        JOIN egcl_billaccountdetail as ba ON bd.id=ba.billdetailid
+        JOIN eg_user ON py.createdby::INTEGER=eg_user.id
+        WHERE  bi.status = 'CANCELLED'  AND bi.consumercode like 'UC%'
+        AND rh.tenantid=$tenantid
+    orderby: ORDER BY receiptdate DESC
 
   - reportName: MiscReceiptULBShort
     summary: Receipt Register Miscellaneous
