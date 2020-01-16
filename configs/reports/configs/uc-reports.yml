@@ -203,12 +203,12 @@ ReportDefinitions:
         type: string
         source: uc
         total: false
-      - name: totalAmount
+      - name: totalamount
         label: reports.uc.totalamount
         type: string
         source: uc
         total: true
-      - name: paymentMode
+      - name: paymentmode
         label: reports.uc.paymentmode
         type: string
         source: uc
@@ -262,9 +262,9 @@ ReportDefinitions:
           rh.businessservice as businesservice,
           receipt_breakup.*,
           (case when py.paymentmode like 'Cash' then '' else  transactionnumber end) as ddorchequenumber,
-          bi.totalamount as totalAmount,
+          bi.totalamount as totalamount,
           eg_user.name as collectorname,
-          py.paymentmode as paymentMode,
+          py.paymentmode as paymentmode,
           bi.status as status
         FROM egcl_payment as py
         JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
