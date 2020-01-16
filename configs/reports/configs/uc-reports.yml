@@ -163,12 +163,22 @@ ReportDefinitions:
         type: string
         source: uc
         total: false
+      - name: g8issuedate
+        label: reports.uc.g8issuedate
+        type: string
+        source: uc
+        total: false
+      - name: g8receiptno
+        label: reports.uc.g8receiptno
+        type: string
+        source: uc
+        total: false
       - name: status
         label: reports.uc.receiptstatus
         type: string
         source: uc
         total: false
-      - name: businesservice
+      - name: servicecategory
         label: reports.uc.businessdetails
         type: string
         source: uc
@@ -195,6 +205,26 @@ ReportDefinitions:
         total: true
       - name: ddorchequenumber
         label: reports.uc.ddorchequenumber
+        type: string
+        source: uc
+        total: false
+      - name: ddchequedate
+        label: reports.uc.ddorchequedate
+        type: string
+        source: uc
+        total: false
+      - name: bankname
+        label: reports.uc.bankname
+        type: string
+        source: uc
+        total: false
+      - name: branchname
+        label: reports.uc.branchname
+        type: string
+        source: uc
+        total: false
+      - name: collectiontype
+        label: reports.uc.collectiontype
         type: string
         source: uc
         total: false
@@ -226,6 +256,22 @@ ReportDefinitions:
         source: uc
         isMandatory: false
         searchClause: AND rh.receiptdate <= $toDate
+      - name: businessservice
+        label: reports.uc.businessservice
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?moduleName=BillingService&masterName=BusinessService&tenantId=$tenantid|$.MdmsRes.BillingService.BusinessService[*].billingService|$.MdmsRes.BillingService.BusinessService[*].businessService
+        source: uc
+        wrapper: true
+        isMandatory: false
+        searchClause: AND rh.businessdetails = $businessservice
+      - name: collectorname
+        label: reports.uc.collectorname
+        type: singlevaluelist
+        pattern: http://egov-hrms:8080/egov-hrms/employees/_search?tenantId=$tenantid&roles=UC_EMP|$.Employees[*].user.id|$.Employees[*].user.name
+        source: uc
+        wrapper: true
+        isMandatory: false
+        searchClause: AND eg_user.id = $collectorname::INTEGER
     query: |
         -- Use CTE to force query plan, compute & use CTE later
         WITH receipt_breakup AS (
@@ -243,12 +289,12 @@ ReportDefinitions:
           rh.tenantid as ulb,
           bi.consumercode as receiptnumber,
           To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,
-          rh.businessservice as businesservice,
+          rh.businessservice as Businesservice,
           receipt_breakup.*,
           (case when py.paymentmode like 'Cash' then '' else  transactionnumber end) as ddorchequenumber,
-          bi.totalamount as totalamount,
+          bi.totalamount as TotalAmount,
           eg_user.name as collectorname,
-          py.paymentmode as paymentmode,
+          py.paymentmode as paymentMode,
           bi.status as status
         FROM egcl_payment as py
         JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
@@ -746,18 +792,25 @@ ReportDefinitions:
         source: uc
         isMandatory: false
         searchClause: AND rh.receiptdate <= $toDate
+      - name: collectorname
+        label: reports.uc.collectorname
+        type: singlevaluelist
+        pattern: 
+        source: uc
+        wrapper: true
+        isMandatory: false
+        searchClause: AND eg_user.id = $collectorname::INTEGER
     query: |
         -- Use CTE to force query plan, compute & use CTE later
-      select eg_user.name as collectorname,
-      py.payername as consumername, 
-      py.mobilenumber as mobilenumber,
-      bi.totalamount as amount,
-      rh.businessservice as servicecategory,
-      To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate, 
-      rh.additionaldetails->>'comment' as remarks
-      from egcl_payment py  JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
-      JOIN egcl_bill as bi ON bi.id=rh.billid 
-      JOIN eg_user ON py.createdby::INTEGER=eg_user.id
-      where bi.status != 'CANCELLED' AND bi.consumercode LIKE '%UC%'
-      AND rh.tenantid=$tenantid
-      orderby: ORDER BY rh.receiptdate DESC
+        select eg_user.name as collectorname,
+        py.payername as consumername, 
+        py.mobilenumber as mobilenumber,
+        bi.totalamount as TotalAmount,rh.businessservice as Businesservice,
+        To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate, 
+        rh.additionaldetails->>'comment' as remarks
+        from egcl_payment py  JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
+        JOIN egcl_bill as bi ON bi.id=rh.billid 
+        JOIN eg_user ON py.createdby::INTEGER=eg_user.id
+        where bi.status != 'CANCELLED' AND bi.consumercode LIKE '%UC%'
+        AND rh.tenantid=$tenantid
+        orderby: ORDER BY rh.receiptdate DESC;
