@@ -299,6 +299,7 @@ ReportDefinitions:
         FROM egcl_payment as py
         JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
         JOIN egcl_bill as bi ON bi.id=rh.billid
+        JOIN egcl_billdetial as bd ON bd.billid=bi.id
         JOIN receipt_breakup ON bd.id = receipt_breakup.receiptheader
         JOIN egcl_billaccountdetail as ba ON bd.id=ba.billdetailid
         JOIN eg_user ON py.createdby::INTEGER=eg_user.id
