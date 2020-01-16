@@ -805,7 +805,8 @@ ReportDefinitions:
         select eg_user.name as collectorname,
         py.payername as consumername, 
         py.mobilenumber as mobilenumber,
-        bi.totalamount as TotalAmount,rh.businessservice as Businesservice,
+        bi.totalamount as amount,
+        rh.businessservice as servicecategory,
         To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate, 
         rh.additionaldetails->>'comment' as remarks
         from egcl_payment py  JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
