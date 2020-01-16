@@ -813,4 +813,4 @@ ReportDefinitions:
         JOIN eg_user ON py.createdby::INTEGER=eg_user.id
         where bi.status != 'CANCELLED' AND bi.consumercode LIKE '%UC%'
         AND rh.tenantid=$tenantid
-        orderby: ORDER BY rh.receiptdate DESC;
+        orderby: ORDER BY rh.receiptdate DESC
