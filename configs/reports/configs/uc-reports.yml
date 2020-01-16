@@ -163,22 +163,12 @@ ReportDefinitions:
         type: string
         source: uc
         total: false
-      - name: g8issuedate
-        label: reports.uc.g8issuedate
-        type: string
-        source: uc
-        total: false
-      - name: g8receiptno
-        label: reports.uc.g8receiptno
-        type: string
-        source: uc
-        total: false
       - name: status
         label: reports.uc.receiptstatus
         type: string
         source: uc
         total: false
-      - name: servicecategory
+      - name: Businesservice
         label: reports.uc.businessdetails
         type: string
         source: uc
@@ -208,37 +198,17 @@ ReportDefinitions:
         type: string
         source: uc
         total: false
-      - name: ddchequedate
-        label: reports.uc.ddorchequedate
-        type: string
-        source: uc
-        total: false
-      - name: bankname
-        label: reports.uc.bankname
-        type: string
-        source: uc
-        total: false
-      - name: branchname
-        label: reports.uc.branchname
-        type: string
-        source: uc
-        total: false
-      - name: collectiontype
-        label: reports.uc.collectiontype
-        type: string
-        source: uc
-        total: false
       - name: collectorname
         label: reports.uc.collectorname
         type: string
         source: uc
         total: false
-      - name: totalamount
+      - name: TotalAmount
         label: reports.uc.totalamount
         type: string
         source: uc
         total: true
-      - name: paymentmode
+      - name: paymentMode
         label: reports.uc.paymentmode
         type: string
         source: uc
@@ -802,15 +772,16 @@ ReportDefinitions:
         searchClause: AND eg_user.id = $collectorname::INTEGER
     query: |
         -- Use CTE to force query plan, compute & use CTE later
-        select eg_user.name as collectorname,
-        py.payername as consumername, 
-        py.mobilenumber as mobilenumber,
-        bi.totalamount as TotalAmount,rh.businessservice as Businesservice,
-        To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate, 
-        rh.additionaldetails->>'comment' as remarks
-        from egcl_payment py  JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
-        JOIN egcl_bill as bi ON bi.id=rh.billid 
-        JOIN eg_user ON py.createdby::INTEGER=eg_user.id
-        where bi.status != 'CANCELLED' AND bi.consumercode LIKE '%UC%'
-        AND rh.tenantid=$tenantid
-        orderby: ORDER BY rh.receiptdate DESC
+      select eg_user.name as collectorname,
+      py.payername as consumername, 
+      py.mobilenumber as mobilenumber,
+      bi.totalamount as amount,
+      rh.businessservice as servicecategory,
+      To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate, 
+      rh.additionaldetails->>'comment' as remarks
+      from egcl_payment py  JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
+      JOIN egcl_bill as bi ON bi.id=rh.billid 
+      JOIN eg_user ON py.createdby::INTEGER=eg_user.id
+      where bi.status != 'CANCELLED' AND bi.consumercode LIKE '%UC%'
+      AND rh.tenantid=$tenantid
+      orderby: ORDER BY rh.receiptdate DESC
