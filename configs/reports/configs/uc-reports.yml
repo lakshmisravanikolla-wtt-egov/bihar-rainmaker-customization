@@ -291,7 +291,7 @@ ReportDefinitions:
           To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,
           rh.businessservice as Businesservice,
           receipt_breakup.*,
-          (case when py.paymentmode like 'Cash' then '' else  transactionnumber end) as ddorchequenumber,
+          (case when py.paymentmode like 'CASH' then '' else  transactionnumber end) as ddorchequenumber,
           bi.totalamount as TotalAmount,
           eg_user.name as collectorname,
           py.paymentmode as paymentMode,
