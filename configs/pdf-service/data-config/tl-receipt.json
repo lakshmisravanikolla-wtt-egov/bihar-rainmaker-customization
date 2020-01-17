@@ -107,6 +107,12 @@
                               }
                           },
                           {
+                              "variable": "applicationFee",
+                              "value": {
+                                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode=='TL_APPLICATION_FEE')].amount"
+                              }
+                          },
+                          {
                               "variable": "adhocrebate",
                               "value": {
                                   "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode=='TL_ADHOC_REBATE')].amount"
@@ -188,6 +194,18 @@
                               "variable": "application_type",
                               "value": {
                                   "path": "TL_RECEIPT_LABEL_APPLICATION_TYPE"
+                              },
+                              "type": "label",
+                              "localisation": {
+                                  "required": true,
+                                  "prefix": null,
+                                  "module": "rainmaker-receipt"
+                              }
+                          },
+                          {
+                              "variable": "application_fee",
+                              "value": {
+                                  "path": "TL_RECEIPT_LABEL_APPLICATION_FEE"
                               },
                               "type": "label",
                               "localisation": {

@@ -493,12 +493,24 @@
             "*",
             "*",
             "*",
+            "*",
             "*"
           ],
           "body": [
             [
               {
                 "text": "{{tl_tax}}",
+                "border": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "alignment": "center",
+                "style": "receipttablevalue"
+              },
+              {
+                "text": "{{application_fee}}",
                 "border": [
                   true,
                   true,
@@ -567,6 +579,17 @@
             [
               {
                 "text": "{{licenseTax}}",
+                "border": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "alignment": "center",
+                "style": "receipttable"
+              },
+              {
+                "text": "{{applicationFee}}",
                 "border": [
                   true,
                   true,
