@@ -593,17 +593,19 @@ ReportDefinitions:
     query: |
         -- Use CTE to force query plan, compute & use CTE later
         SELECT
-          rh.businessdetails as servicetype,
+          rh.businessservice as servicetype,
           count(distinct rh.id) as totalreceipts,
-          SUM(CASE WHEN taxheadcode LIKE '%_TAX' THEN adjustedamount ELSE 0 END) as tax, 
-          SUM(CASE WHEN taxheadcode LIKE '%_CGST' THEN adjustedamount ELSE 0 END) as cgst, 
-          SUM(CASE WHEN taxheadcode LIKE '%_SGST' THEN adjustedamount ELSE 0 END) as sgst, 
+          SUM(CASE WHEN taxheadcode LIKE '%_TAX' THEN adjustedamount ELSE 0 END) as tax,
+          SUM(CASE WHEN taxheadcode LIKE '%_CGST' THEN adjustedamount ELSE 0 END) as cgst,
+          SUM(CASE WHEN taxheadcode LIKE '%_SGST' THEN adjustedamount ELSE 0 END) as sgst,
           SUM(CASE WHEN taxheadcode LIKE '%_FIELD_FEE' THEN adjustedamount ELSE 0 END) as fieldcollection,
-          SUM(amount) as totalcollection
-        from egcl_receiptheader_v1 rh, egcl_receiptdetails_v1 as rd
-        WHERE rh.id=rd.receiptheader and rh.status != 'Cancelled' AND rh.tenantid=$tenantid AND receiptnumber like 'MP%' 
-    groupby: GROUP BY rh.businessdetails
-    orderby: ORDER BY rh.businessdetails
+          (SUM(CASE WHEN taxheadcode LIKE '%_TAX' THEN adjustedamount ELSE 0 END)  + SUM(CASE WHEN taxheadcode LIKE '%_CGST' THEN adjustedamount ELSE 0 END) +SUM(CASE WHEN taxheadcode LIKE '%_SGST' THEN adjustedamount ELSE 0 END) +SUM(CASE WHEN taxheadcode LIKE '%_FIELD_FEE' THEN adjustedamount ELSE 0 END) )as totalcollection
+        FROM egcl_billaccountdetail as ba, egcl_paymentdetail AS rh
+        JOIN egcl_bill as bi ON bi.id=rh.billid
+        JOIN egcl_billdetial as bd ON bd.billid=bi.id
+        WHERE bd.id=ba.billdetailid and bd.billid=bi.id and bi.id=rh.billid and bi.status != 'CANCELLED' AND rh.tenantid=$tenant.id AND  bi.consumercode like 'UC%'
+    groupby:   GROUP BY rh.businessservice
+    orderby:   ORDER BY rh.businessservice
 
   - reportName: MiscReceiptULBCancelled
     summary: Cancelled Receipt Miscellaneous
