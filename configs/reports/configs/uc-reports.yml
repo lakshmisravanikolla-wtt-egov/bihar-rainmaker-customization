@@ -603,7 +603,7 @@ ReportDefinitions:
         FROM egcl_billaccountdetail as ba, egcl_paymentdetail AS rh
         JOIN egcl_bill as bi ON bi.id=rh.billid
         JOIN egcl_billdetial as bd ON bd.billid=bi.id
-        WHERE bd.id=ba.billdetailid and bd.billid=bi.id and bi.id=rh.billid and bi.status != 'CANCELLED' AND rh.tenantid=$tenant.id AND  bi.consumercode like 'UC%'
+        WHERE bd.id=ba.billdetailid and bd.billid=bi.id and bi.id=rh.billid and bi.status != 'CANCELLED' AND rh.tenantid=$tenantid AND  bi.consumercode like 'UC%'
     groupby:   GROUP BY rh.businessservice
     orderby:   ORDER BY rh.businessservice
 
