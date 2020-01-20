@@ -27,7 +27,7 @@
                       "style": "receipt-logo-header"
                     },
                     {
-                      "text": "{{serviceType}} {{payment_receipt}}",
+                      "text": "Miscellaneous {{payment_receipt}}",
                       "style": "receipt-logo-sub-header"
                     }
                   ],
@@ -527,7 +527,7 @@
         "fontSize": 12,
         "fontWeight": 400,
         "margin": [
-          -30,
+          0,
           8,
           0,
           8
