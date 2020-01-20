@@ -44,7 +44,7 @@
                   },
                   "localisation":{
                     "required":true,
-                    "prefix":"MODULE",   
+                    "prefix":"BILLINGSERVICE_BUSINESSSERVICE",   
                     "module":"rainmaker-common"
                  }
                 },
