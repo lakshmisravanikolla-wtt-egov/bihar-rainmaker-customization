@@ -45,7 +45,7 @@
                   "localisation":{
                     "required":true,
                     "prefix":"BILLINGSERVICE_BUSINESSSERVICE",   
-                    "module":"rainmaker-common"
+                    "module":"rainmaker-uc"
                  }
                 },
                 {
@@ -461,7 +461,7 @@
                         "localisation":{
                           "required":true,
                           "prefix": "TENANT_TENANTS",
-                          "module":"rainmaker-common"
+                          "module":"rainmaker-pgr"
                           }
                       }
                     ]
