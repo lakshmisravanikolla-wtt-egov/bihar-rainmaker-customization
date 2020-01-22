@@ -289,7 +289,7 @@ ReportDefinitions:
           rh.tenantid as ulb,
           bi.consumercode as receiptnumber,
           To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,
-          CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))) as Businesservice,
+          (select message from message where locale ='en_IN'and code =(CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))))) as Businesservice,
           receipt_breakup.*,
           (case when py.paymentmode like 'CASH' then '' else  transactionnumber end) as ddorchequenumber,
           bi.totalamount as TotalAmount,
@@ -593,7 +593,7 @@ ReportDefinitions:
     query: |
         -- Use CTE to force query plan, compute & use CTE later
         SELECT
-          CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))) as servicetype,
+          (select message from message where locale ='en_IN'and code =(CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))))) as as servicetype,
           count(distinct rh.id) as totalreceipts,
           SUM(CASE WHEN taxheadcode LIKE '%_TAX' THEN adjustedamount ELSE 0 END) as tax,
           SUM(CASE WHEN taxheadcode LIKE '%_CGST' THEN adjustedamount ELSE 0 END) as cgst,
@@ -723,7 +723,7 @@ ReportDefinitions:
           rh.tenantid as ulb,
           bi.consumercode as receiptnumber,
           To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,
-          CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))) as as Businesservice,
+          (select message from message where locale ='en_IN'and code =(CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))))) as Businesservice,
           receipt_breakup.*,
           (case when py.paymentmode like 'CASH' then '' else  transactionnumber end) as ddorchequenumber,
           bi.totalamount as TotalAmount,
@@ -811,7 +811,7 @@ ReportDefinitions:
         py.payername as consumername, 
         py.mobilenumber as mobilenumber,
         bi.totalamount as amount,
-        CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))) as as servicecategory,
+        (select message from message where locale ='en_IN'and code =(CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',UPPER(replace(replace(rh.businessservice,'-','_'),'.','_'))))) as servicecategory,
         To_char((To_timestamp(rh.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate, 
         rh.additionaldetails->>'comment' as remarks
         from egcl_payment py  JOIN egcl_paymentdetail AS rh ON py.id=rh.paymentid
