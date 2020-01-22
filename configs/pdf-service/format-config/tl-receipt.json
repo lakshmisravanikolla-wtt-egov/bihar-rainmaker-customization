@@ -10,7 +10,6 @@
           "table": {
             "widths": [
               "10%",
-              "60%",
               "*"
              
             ],
@@ -52,31 +51,6 @@
                     0,
                     0
                   ]
-                },
-                {
-                  "stack": [
-                    {
-                      "text": "{{receipt_no}}",
-                      "border": [
-                        true,
-                        true,
-                        false,
-                        true
-                      ],
-                      "style": "receipttablevalue"
-                    },
-                    {
-                      "text": "{{receiptNo}}",
-                      "border": [
-                        false,
-                        true,
-                        true,
-                        true
-                       ],
-                      "style": "receipttable"
-                    }
-                  ],
-                  "alignment": "center"
                 }
               ]
             ]
@@ -578,7 +552,7 @@
             ],
             [
               {
-                "text": "{{licenseTax}}",
+                "text": "₹ {{licenseTax}}",
                 "border": [
                   true,
                   true,
@@ -589,7 +563,7 @@
                 "style": "receipttable"
               },
               {
-                "text": "{{applicationFee}}",
+                "text": "₹ {{applicationFee}}",
                 "border": [
                   true,
                   true,
@@ -600,7 +574,7 @@
                 "style": "receipttable"
               },
               {
-                "text": "{{penalty}}",
+                "text": "₹ {{penalty}}",
                 "border": [
                   true,
                   true,
@@ -611,7 +585,7 @@
                 "style": "receipttable"
               },
               {
-                "text": "{{rebate}}",
+                "text": "₹ {{rebate}}",
                 "border": [
                   true,
                   true,
@@ -622,7 +596,7 @@
                 "style": "receipttable"
               },
               {
-                "text": "{{adhocPenalty}}",
+                "text": "₹ {{adhocPenalty}}",
                 "border": [
                   true,
                   true,
@@ -633,7 +607,7 @@
                 "style": "receipttable"
               },
               {
-                "text": "{{adhocRebate}}",
+                "text": "₹ {{adhocRebate}}",
                 "border": [
                   true,
                   true,
@@ -644,7 +618,7 @@
                 "style": "receipttable"
               },
               {
-                "text": "{{total}}",
+                "text": "₹ {{total}}",
                 "border": [
                   true,
                   true,
@@ -695,7 +669,7 @@
                 "style": "receipttablevalue"
               },
               {
-                "text": "{{paidAmount}}",
+                "text": "₹ {{paidAmount}}",
                 "border": [
                   false,
                   true,
