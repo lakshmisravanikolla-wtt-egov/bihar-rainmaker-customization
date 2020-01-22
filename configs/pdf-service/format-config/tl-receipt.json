@@ -689,7 +689,7 @@
                 "style": "receipttablevalue"
               },
               {
-                "text": "{{pendingAmount}}",
+                "text": "₹ {{pendingAmount}}",
                 "border": [
                   false,
                   true,
