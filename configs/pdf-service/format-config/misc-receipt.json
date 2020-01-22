@@ -17,7 +17,13 @@
                 {
                   "image": "{{logoImage}}",
                   "width": 50,
-                  "height": 61.25
+                  "height": 61.25,
+                  "margin": [
+                    10,
+                    0,
+                    0,
+                    0
+                  ]  
                 },
                 {
                   "stack": [
