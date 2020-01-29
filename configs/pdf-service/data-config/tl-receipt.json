@@ -796,11 +796,13 @@
                                   },
                                   {
                                       "variable": "validFrom",
-                                      "value": "$.Licenses[0].validFrom"
+                                      "value": "$.Licenses[0].validFrom",
+                                      "type":"date"
                                    },
                                   {
                                       "variable": "validTo",
-                                      "value": "$.Licenses[0].validTo"                                      
+                                      "value": "$.Licenses[0].validTo",
+                                      "type":"date"                                      
                                    }                                  
                               ]
                           }
