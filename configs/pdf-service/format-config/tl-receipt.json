@@ -120,37 +120,6 @@
         ]
       },
       {
-        "style": "applicationdtls",
-        "columns": [
-          {
-            "text": [
-              {
-                "text": "{{financial_year}} : ",
-                "bold": true
-              },
-              {
-                "text": "{{validFrom}}-{{validTo}}",
-                "bold": false
-              }
-            ],
-            "alignment": "left"
-          },
-          {
-            "text": [
-              {
-                "text": "{{payment_date}} : ",
-                "bold": true
-              },
-              {
-                "text": "{{paymentDate}}",
-                "bold": false
-              }
-            ],
-            "alignment": "right"
-          }
-        ]
-      },
-      {
         "style": "receiptapprover",
         "columns": [
           {
