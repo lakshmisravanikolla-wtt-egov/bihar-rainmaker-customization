@@ -792,7 +792,8 @@
                                           "required": true,
                                           "prefix": "TRADELICENSE_OCCUPANCYTYPE",
                                           "module": "rainmaker-tl"
-                                   },
+                                   }
+                                  },
                                   {
                                       "variable": "validFrom",
                                       "value": "$.Licenses[0].validFrom"
@@ -800,8 +801,7 @@
                                   {
                                       "variable": "validTo",
                                       "value": "$.Licenses[0].validTo"                                      
-                                   }
-                                  }
+                                   }                                  
                               ]
                           }
                       ]
