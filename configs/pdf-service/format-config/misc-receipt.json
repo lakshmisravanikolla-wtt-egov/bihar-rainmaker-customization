@@ -47,7 +47,7 @@
             ]
           ]
         },
-        "layout": "noBorders"
+        "layout": {}
       },
       {
         "style": "receipt-approver",
@@ -482,6 +482,7 @@
     ],
     "styles": {
      "noc-head": {
+      "fillColor": "#b8bfcc",
       "margin": [
         -25,
         -30,
