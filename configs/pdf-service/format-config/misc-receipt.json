@@ -482,7 +482,13 @@
     ],
     "styles": {
      "noc-head": {
-      "fillColor": "#b8bfcc"
+      "fillColor": "#b8bfcc",
+      "margin": [
+        -30,
+        -30,
+        0,
+        1
+      ]
     },
     "receipt-logo-header": {
       "color": "#000000",
