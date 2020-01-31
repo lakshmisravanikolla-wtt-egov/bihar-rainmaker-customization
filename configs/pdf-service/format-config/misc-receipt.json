@@ -77,7 +77,7 @@
           "body": [
             [
               {
-                "text": "{{receipt_no}}.",
+                "text": "{{receipt_no}} :",
                 "border": [
                   true,
                   true,
@@ -97,7 +97,7 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{payment_date}}",
+                "text": "{{payment_date}} :",
                 "border": [
                   true,
                   true,
@@ -117,7 +117,7 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{consumer_id}}",
+                "text": "{{consumer_id}} :",
                 "border": [
                   true,
                   true,
@@ -167,7 +167,7 @@
           "body": [
             [
               {
-                "text": "{{payer_name}}",
+                "text": "{{payer_name}} :",
                 "border": [
                   true,
                   true,
@@ -187,7 +187,7 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{payer_contact}}",
+                "text": "{{payer_contact}} :",
                 "border": [
                   true,
                   true,
@@ -237,7 +237,7 @@
           "body": [
             [
               {
-                "text": "{{service_type}}",
+                "text": "{{service_type}} :",
                 "border": [
                   true,
                   true,
@@ -279,7 +279,7 @@
             ],
             [
               {
-                "text": "{{billing_period}}",
+                "text": "{{billing_period}} :",
                 "border": [
                   true,
                   true,
@@ -299,7 +299,7 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{paid_amount}}",
+                "text": "{{paid_amount}} :",
                 "border": [
                   true,
                   true,
@@ -321,7 +321,7 @@
             ],
             [
               {
-                "text": "{{payment_mode}}",
+                "text": "{{payment_mode}} :",
                 "border": [
                   true,
                   true,
@@ -341,7 +341,7 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{transaction_id}}",
+                "text": "{{transaction_id}} :",
                 "border": [
                   true,
                   true,
@@ -363,7 +363,7 @@
             ],
             [
               {
-                "text": "{{g8_receipt_no}}.",
+                "text": "{{g8_receipt_no}} :",
                 "border": [
                   true,
                   true,
@@ -383,7 +383,7 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{g8_receipt_date}}",
+                "text": "{{g8_receipt_date}} :",
                 "border": [
                   true,
                   true,
@@ -413,7 +413,7 @@
           {
             "text": [
               {
-                "text": "{{generated_by}}: ",
+                "text": "{{generated_by}} : ",
                 "bold": true
               },
               {
