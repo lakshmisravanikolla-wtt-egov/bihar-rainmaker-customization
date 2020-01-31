@@ -484,9 +484,9 @@
      "noc-head": {
       "fillColor": "#b8bfcc",
       "margin": [
+        -25,
         -30,
-        -30,
-        0,
+        -22,
         1
       ]
     },
