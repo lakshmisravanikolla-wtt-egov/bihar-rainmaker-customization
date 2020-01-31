@@ -47,7 +47,7 @@
             ]
           ]
         },
-        "layout": "noBorders"
+        "layout": {}
       },
       {
         "style": "receipt-approver",
@@ -482,12 +482,7 @@
     ],
     "styles": {
      "noc-head": {
-      "margin": [
-        -30,
-        -30,
-        0,
-        1
-      ]
+      "fillColor": "#b8bfcc"
     },
     "receipt-logo-header": {
       "color": "#000000",
