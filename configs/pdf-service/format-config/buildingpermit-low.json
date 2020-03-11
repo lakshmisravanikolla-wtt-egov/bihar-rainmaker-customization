@@ -1,22 +1,22 @@
 {
-  "key": "buildingpermit",
+  "key": "buildingpermit-low",
   "config": {
     "defaultStyle": {
       "font": "Cambay"
     },
     "content": [
       {
-        "text": "{{GENERATED_ON}}",
-        "absolutePosition": {
-          "x": 420,
-          "y": 5
-        }
+          "text" : "{{GENERATED_ON}}",
+          "absolutePosition" : {
+             "x" : 420,
+             "y" : 5
+          }
       },
       {
-        "text": " : {{orderGeneratedOn}}",
-        "absolutePosition": {
-          "x": 500,
-          "y": 5
+        "text" : " : {{orderGeneratedOn}}",
+        "absolutePosition" : {
+            "x" : 500,
+            "y" : 5
         }
       },
       {
@@ -81,17 +81,17 @@
             "text": "{{WRT_TXT}}"
           },
           {
-            "text": " {{applicationNo}}",
-            "bold": true
+            "text" : " {{applicationNo}}",
+            "bold" : true
           },
           {
-            "text": " {{dated}}"
+            "text" : " {{dated}}"
           },
           {
-            "text": " {{applicationDate}}"
+            "text" : " {{applicationDate}}"
           },
           {
-            "text": ", {{PERMISSION_GRANT_TXT}} : "
+            "text" : ", {{PERMISSION_GRANT_TXT}} : "
           }
         ],
         "style": "top-margin"
@@ -142,25 +142,25 @@
             "bold": true
           },
           {
-            "text": " {{SERVEY_NO}} "
+             "text" : " {{SERVEY_NO}} "
           },
           {
-            "text": "{{reServeyPlotNo}}",
-            "bold": true
+            "text" : "{{reServeyPlotNo}}",
+            "bold" : true
+          },          
+          {
+            "text" : " {{TOWNPLANNING_TXT}} "
+         },
+         {
+           "text" : "{{townPlanningScheme}}",
+           "bold" : true
+         },         
+          {
+          "text" : " {{PROPOSE_LAND}} "
           },
           {
-            "text": " {{TOWNPLANNING_TXT}} "
-          },
-          {
-            "text": "{{townPlanningScheme}}",
-            "bold": true
-          },
-          {
-            "text": " {{PROPOSE_LAND}} "
-          },
-          {
-            "text": "{{proposedLandUse}}",
-            "bold": true
+            "text" : "{{proposedLandUse}}",
+            "bold" : true
           },
           {
             "text": " {{OF}} "
@@ -176,9 +176,7 @@
       },
       {
         "separator": ")",
-        "ol": [
-          "{{conditions}}"
-        ]
+        "ol": ["{{conditions}}"]
       },
       {
         "stack": [
@@ -198,24 +196,24 @@
           "body": [
             [
               {
-                "text": "{{FEE_DSCR}}",
-                "bold": true
+                "text" : "{{FEE_DSCR}}",
+                "bold" : true
               },
               {
-                "text": "{{AMOUNT}}",
-                "bold": true
+                "text" : "{{AMOUNT}}",
+                "bold" : true
               }
-            ],
+            ],            
             "{{#paymentDetails}}[{ \"text\":\"{{headCode}}\", \"border\":[ true, true, true, true ]},{ \"text\":\"{{amnt}}\", \"border\":[ true, true, true, true ]}]{{/paymentDetails}}",
-            [
-              {
-                "text": "{{TOTAL}}"
-              },
-              {
-                "text": "{{totalDue}}"
-              }
+              [
+                {
+                  "text" : "{{TOTAL}}"
+                },
+                {
+                  "text" : "{{totalDue}}"
+                }
+              ]
             ]
-          ]
         },
         "margin": [
           0,
@@ -235,12 +233,19 @@
             "margin": 2
           },
           {
-            "text": "{{approvedBy}}",
+            "text": "{{tenantName}}",
             "margin": 2
           }
         ],
         "alignment": "right",
         "style": "top-margin"
+      },
+      {
+        "text" : [
+          {
+            "text" : "{{AUTH_DSCR}}"
+          }
+        ]
       },
       {
         "text": [
@@ -265,13 +270,13 @@
       {
         "text": [
           {
-            "text": "{{SUMMARY1}}"
+            "text" : "{{SUMMARY1}}"
           },
           {
-            "text": " {{Bihar_Tenant}} "
+            "text" : " {{Bihar_Tenant}} "
           },
           {
-            "text": "{{SUMMARY2}}."
+            "text" : "{{SUMMARY2}}."
           }
         ],
         "style": "top-margin"
