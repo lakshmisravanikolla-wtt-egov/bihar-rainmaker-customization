@@ -527,7 +527,7 @@
               {
                 "variable": "Bihar_Tenant",
                 "value": {
-                  "path": "Bihar_Tenant"
+                  "path": "BIHAR_TENANT"
                 },
                 "type" : "label",
                 "localisation": {
