@@ -566,7 +566,7 @@
           {
             "externalAPI": [
               {
-                "path": "http://collection-services:8080/payments/_search",
+                "path": "http://collection-services:8080/collection-services/payments/_search",
                 "queryParam": "tenantId=$.tenantId,consumerCodes=$.applicationNo",
                 "apiRequest": null,
                 "responseMapping": [
