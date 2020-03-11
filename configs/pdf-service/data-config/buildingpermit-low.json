@@ -57,13 +57,13 @@
               {
                 "variable": "conditions",
                 "value": {
-                  "path": "$.additionalDetails.pendingapproval.*"
+                  "path": "$.additionalDetails"
                 },
                 "type": "array-column",
                 "format": {
                   "scema": [
                     {
-                      "key": "condition"
+                      "key": "pendingapproval"
                     }
                   ]
                 }
@@ -443,7 +443,7 @@
               {
                 "variable": "AUTH_OFFICER",
                 "value": {
-                  "path": "BPA_PDF_AUTH_OFFICER"
+                  "path": "BPA_PDF_COMMISSIONER"
                 },
                 "type" : "label",
                 "localisation": {
