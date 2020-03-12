@@ -28,7 +28,7 @@
               {
                 "stack": [
                   {
-                    "text": "{{logo-header}} {{Municipal_Corporation}}",
+                    "text": "{{logo-header}}",
                     "style": "receipt-logo-header"
                   },
                   {
@@ -68,11 +68,11 @@
         "table": {
           "widths": [
             "16%",
-            "16%",
-            "18%",
             "18%",
             "16%",
-            "16%"
+            "10%",
+            "18%",
+            "22%"
           ],
           "body": [
             [
@@ -471,11 +471,6 @@
             "text": "{{disclamer_4}}",
             "bold": false,
             "style": "pt-disclaimer-value"
-          },
-          {
-            "text": "{{disclamer_5}}",
-            "bold": false,
-            "style": "pt-disclaimer-value"
           }
         ]
       }
@@ -545,7 +540,7 @@
       "fontSize": 10,
       "fontWeight": 400,
       "margin": [
-        0,
+        -6,
         8,
         0,
         0
