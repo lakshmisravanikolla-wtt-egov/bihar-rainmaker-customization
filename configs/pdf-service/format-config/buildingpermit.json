@@ -6,17 +6,17 @@
     },
     "content": [
       {
-        "text": "{{GENERATED_ON}}",
-        "absolutePosition": {
-          "x": 400,
-          "y": 5
+        "text" : "{{GENERATED_ON}} : ",
+        "absolutePosition" : {
+           "x" : 400,
+           "y" : 5
         }
       },
       {
-        "text": " : {{orderGeneratedOn}}",
-        "absolutePosition": {
-          "x": 500,
-          "y": 5
+        "text" : " {{orderGeneratedOn}}",
+        "absolutePosition" : {
+           "x" : 500,
+           "y" : 5
         }
       },
       {
