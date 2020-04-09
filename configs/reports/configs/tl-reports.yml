@@ -901,5 +901,5 @@ ReportDefinitions:
     split_part(message,'-',2) as ward,
     split_part(message,'-',1) as mohalla
     from message
-    where code LIKE '%_ADMIN_LOC%';
+    where code LIKE '%_ADMIN_LOC%'
    
