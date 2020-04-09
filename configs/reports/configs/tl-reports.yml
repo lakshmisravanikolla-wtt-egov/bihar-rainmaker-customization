@@ -859,3 +859,46 @@ ReportDefinitions:
       sum(case when applicationtype='APPLICATIONTYPE.RENEWAL' then rate else 0 END) as renewalfee
       from eg_tl_billingslab  
  group by: structuretype, tradetype
+ 
+ 
+- reportName: StateLevelBoundaryValidation
+  summary: TL Basic Report State Level
+  version: 1.0.0
+  moduleName: rainmaker-tl
+  sourceColumns:
+  - name: tenantId
+    label: report.tl.tenantId
+    type: string
+    source: tl
+    total: false
+  - name: code
+    label: report.tl.code
+    type: string
+    source: tl
+    total: false
+  - name: ward
+    label: report.tl.ward
+    type: string
+    source: tl
+    total: false
+  - name: mohalla
+    label: report.tl.mohalla
+    type: string
+    source: tl
+    total: false
+  searchParams:
+  - name: ulb
+    label: ULB
+    type: singlevaluelist
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+    source: tl
+    wrapper: true
+    isMandatory: true
+    searchClause: AND tenantId = $ulb
+  query: select tenantid as tenantId,
+    code as code,
+    split_part(message,'-',2) as ward,
+    split_part(message,'-',1) as mohalla
+    from message
+    where code LIKE '%_ADMIN_LOC%';
+   
