@@ -849,13 +849,13 @@ ReportDefinitions:
     source: tl
     wrapper: true
     isMandatory: true
-    searchClause: AND tl.tenantId = $ulb
-  query: select tl.tenantId as tenantId, 
+    searchClause: AND tenantId = $ulb
+  query: select tenantId as tenantId, 
       split_part(structuretype,'.',1) as structuretype,
       split_part(structuretype,'.',2) as structuresubtype,
       split_part(tradetype,'.',2) as tradetype,
       tradetype as tradesubtype,
       sum(case when  applicationtype ='APPLICATIONTYPE.NEW' then rate else 0 END) as newlicenesefee,
       sum(case when applicationtype='APPLICATIONTYPE.RENEWAL' then rate else 0 END) as renewalfee
-      from eg_tl_billingslab where tenantid='uk.haldwani' 
+      from eg_tl_billingslab  
  group by: structuretype, tradetype
