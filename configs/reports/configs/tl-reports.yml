@@ -857,7 +857,7 @@ ReportDefinitions:
       sum(case when  applicationtype ='APPLICATIONTYPE.NEW' then rate else 0 END) as newlicenesefee,
       sum(case when applicationtype='APPLICATIONTYPE.RENEWAL' then rate else 0 END) as renewalfee
       from eg_tl_billingslab  
- group by: structuretype, tradetype
+ groupby: GROUP BY structuretype, tradesubtype
  
  
 - reportName: StateLevelBoundaryValidation
