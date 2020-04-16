@@ -38,7 +38,7 @@ ReportDefinitions:
     source: eg_pgr_service
     isMandatory: true
     searchClause: AND createdtime <= $toDate
-  query: SELECT sum(case when source = 'mobileapp' then 1 else 0 end) as citizen_mobile_app, sum(case when source = 'web' then 1 else 0 end) as citizen_web_app, sum(case when source = 'ivr' then 1 else 0 end) as counter_desktop FROM eg_pgr_service WHERE tenantid = $tenantid
+  query: SELECT sum(case when source = 'mobileapp' then 1 else 0 end) as citizen_mobile_app, sum(case when source = 'web' then 1 else 0 end) as citizen_web_app, sum(case when source = 'ivr' then 1 else 0 end) as counter_desktop FROM eg_pgr_service WHERE tenantid = $tenantid AND tenantid != 'uk.testing'
 
 - reportName: DescriptionReport
   summary: Fetches department wise reports based description of the complaint
@@ -155,7 +155,7 @@ ReportDefinitions:
     WHERE eg_pgr_service.accountid = eg_user.id::VARCHAR 
     AND eg_pgr_service.tenantid LIKE $tenantid 
     AND eg_pgr_address.uuid = eg_pgr_service.addressid
-    AND status IN ('open','assigned','reassigrequested','rejected')
+    AND status IN ('open','assigned','reassigrequested','rejected') AND eg_pgr_service.tenantid != 'uk.testing'
   orderby: ORDER BY eg_pgr_service.createdtime asc
 
 - reportName: StateSourceReport
@@ -208,7 +208,7 @@ ReportDefinitions:
     SUM(CASE WHEN source ='web' THEN 1 ELSE 0 END) as web,
     SUM(CASE WHEN source NOT IN ('web', 'ivr', 'mobileapp')  OR source is NULL THEN 1 ELSE 0 END) as unknown
     from eg_pgr_service
-    WHERE tenantid != 'pb.testing'
+    WHERE tenantid != 'uk.testing'
 
   groupby: GROUP BY tenantid
   orderby: ORDER BY tenantid
@@ -321,7 +321,7 @@ ReportDefinitions:
     INNER JOIN eg_pgr_address ON eg_pgr_service.addressid = eg_pgr_address.uuid
     INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) ON deptmap.serviceCode = eg_pgr_service.servicecode
     INNER JOIN (VALUES department_name) AS dept(name,code) ON deptmap.department = dept.code
-    WHERE eg_pgr_service.status = 'assigned' 
+    WHERE eg_pgr_service.status = 'assigned' AND eg_pgr_service.tenantid != 'uk.testing'
     AND servicerequestid IN (SELECT DISTINCT businesskey FROM eg_pgr_action WHERE status = 'assigned' AND "when" IN (select max("when") FROM eg_pgr_action WHERE assignee NOTNULL GROUP BY businesskey) AND assignee = $userid) 
   orderby: ORDER BY eg_pgr_service.createdtime asc
 
@@ -387,7 +387,7 @@ ReportDefinitions:
     SUM(CASE WHEN status ='rejected' THEN 1 ELSE 0 END) as rejected,
     COUNT(status) as total
     from eg_pgr_service 
-    WHERE tenantid != 'pb.testing'
+    WHERE tenantid != 'uk.testing'
   groupby: GROUP BY tenantid
   orderby: ORDER BY tenantid
 
@@ -468,7 +468,7 @@ ReportDefinitions:
     SUM(CASE WHEN status ='rejected' THEN 1 ELSE 0 END) as rejected,
     count(status) as total
     from eg_pgr_service
-    WHERE tenantid != 'pb.testing'
+    WHERE tenantid != 'uk.testing'
   groupby: GROUP BY tenantid,servicecode
   orderby: ORDER BY tenantid,servicecode
 
@@ -555,7 +555,7 @@ ReportDefinitions:
     from eg_pgr_service
     INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) ON deptmap.serviceCode = eg_pgr_service.servicecode
     INNER JOIN (VALUES tbl_def_dept) AS deptmap_def(name,code) ON deptmap.department = deptmap_def.code
-    WHERE tenantid != 'pb.testing'
+    WHERE tenantid != 'uk.testing'
   groupby: GROUP BY tenantid,deptmap_def.name
   orderby: ORDER BY tenantid,deptmap_def.name
 
@@ -631,7 +631,7 @@ ReportDefinitions:
       (select min("when") from eg_pgr_action where action='open' and businesskey = servicerequestid) as opentime
     from eg_pgr_service as ps
     where 
-    tenantid = $tenantid)
+    tenantid = $tenantid AND tenantid != 'uk.testing')
 
     select 
       deptmap_def.name as department,
@@ -717,7 +717,7 @@ ReportDefinitions:
       (select min("when") from eg_pgr_action where action='open' and businesskey = servicerequestid) as opentime
     from eg_pgr_service as ps
     where 
-    tenantid = $tenantid)
+    tenantid = $tenantid AND tenantid != 'uk.testing')
 
     select 
       coalesce((select name from eg_user where id::varchar = assignee),'-- Unassigned --') as employee, 
