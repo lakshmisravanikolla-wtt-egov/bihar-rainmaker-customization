@@ -173,7 +173,7 @@ ReportDefinitions:
                     (SUM(CASE WHEN description LIKE 'PT_DECIMAL_CEILING_CREDIT%' THEN cramount ELSE 0 END)
                     - SUM(CASE WHEN description LIKE 'PT_DECIMAL_CEILING_DEBIT%' THEN dramount ELSE 0 END))  as adjusment
                   FROM egcl_receiptdetails
-                  WHERE tenantid LIKE $tenantid AND tenantid != 'uk.testing'
+                  WHERE tenantid LIKE $tenantid AND tenantid != 'bh.testing'
                   GROUP BY receiptheader
       )
       SELECT 
@@ -201,7 +201,7 @@ ReportDefinitions:
       JOIN receipt_breakup ON rh.id = receipt_breakup.receiptheader
       JOIN eg_pt_propertydetail_v2 pt_detail ON CONCAT(pt_detail.property, ':', pt_detail.assessmentnumber) = rh.consumercode
       JOIN eg_pt_address_v2 pt_addr ON pt_detail.property = pt_addr.property
-      WHERE rh.tenantid LIKE $tenantid and rh.status != 'Cancelled' and rh.tenantid != 'uk.testing'
+      WHERE rh.tenantid LIKE $tenantid and rh.status != 'Cancelled' and rh.tenantid != 'bh.testing'
   orderby: ORDER BY rh.receiptdate DESC
 
 - reportName: CancelledReceiptRegister
@@ -377,7 +377,7 @@ ReportDefinitions:
                     (SUM(CASE WHEN description LIKE 'PT_DECIMAL_CEILING_CREDIT%' THEN cramount ELSE 0 END)
                     - SUM(CASE WHEN description LIKE 'PT_DECIMAL_CEILING_DEBIT%' THEN dramount ELSE 0 END))  as adjusment
                   FROM egcl_receiptdetails
-                  WHERE tenantid LIKE $tenantid AND tenantid != 'uk.testing'
+                  WHERE tenantid LIKE $tenantid AND tenantid != 'bh.testing'
                   GROUP BY receiptheader
       )
       SELECT 
@@ -406,7 +406,7 @@ ReportDefinitions:
       JOIN receipt_breakup ON rh.id = receipt_breakup.receiptheader
       JOIN eg_pt_propertydetail_v2 pt_detail ON CONCAT(pt_detail.property, ':', pt_detail.assessmentnumber) = rh.consumercode
       JOIN eg_pt_address_v2 pt_addr ON pt_detail.property = pt_addr.property
-      WHERE rh.tenantid LIKE $tenantid and rh.status = 'Cancelled' AND rh.tenantid != 'uk.testing'
+      WHERE rh.tenantid LIKE $tenantid and rh.status = 'Cancelled' AND rh.tenantid != 'bh.testing'
   orderby: ORDER BY rh.receiptdate DESC
 
 - reportName: OldUlbWisePtCollection
@@ -461,7 +461,7 @@ ReportDefinitions:
       and ih.instrumentstatus	 != 'CANCELLED' 
       where rh.status != 'Cancelled'
       ) AS instrument_data ON CONCAT(pd.property, ':', pd.assessmentnumber) = instrument_data.consumercode 
-    WHERE tenantid = $tenantid AND tenantid != 'uk.testing'
+    WHERE tenantid = $tenantid AND tenantid != 'bh.testing'
   groupby: GROUP BY tenantid
   orderby: ORDER BY tenantid, totalamountpaid DESC NULLS LAST
 
@@ -636,7 +636,7 @@ ReportDefinitions:
                     (SUM(CASE WHEN description LIKE 'PT_DECIMAL_CEILING_CREDIT%' THEN cramount ELSE 0 END)
                     - SUM(CASE WHEN description LIKE 'PT_DECIMAL_CEILING_DEBIT%' THEN dramount ELSE 0 END))  as adjusment
                   FROM egcl_receiptdetails
-                  WHERE tenantid != 'uk.testing'
+                  WHERE tenantid != 'bh.testing'
                   GROUP BY receiptheader
       )
       SELECT 
@@ -664,7 +664,7 @@ ReportDefinitions:
       JOIN receipt_breakup ON rh.id = receipt_breakup.receiptheader
       JOIN eg_pt_propertydetail_v2 pt_detail ON CONCAT(pt_detail.property, ':', pt_detail.assessmentnumber) = rh.consumercode
       JOIN eg_pt_address_v2 pt_addr ON pt_detail.property = pt_addr.property
-      WHERE rh.tenantid != 'uk.testing' and rh.status = 'Cancelled'
+      WHERE rh.tenantid != 'bh.testing' and rh.status = 'Cancelled'
   orderby: ORDER BY rh.receiptdate DESC
 
 - reportName: StateWidePtCollection
@@ -754,7 +754,7 @@ ReportDefinitions:
       LEFT OUTER JOIN egcl_instrumentheader AS ih ON ri.instrumentheader = ih.id and ih.instrumentstatus	 != 'CANCELLED' 
       where rh.status != 'Cancelled'
       ) AS tbl_amounts ON CONCAT(pd.property, ':', pd.assessmentnumber) = tbl_amounts.consumercode 
-      WHERE tenantid LIKE CONCAT(SPLIT_PART($tenantid, '.', 1), '%') and tenantid != 'uk.testing'
+      WHERE tenantid LIKE CONCAT(SPLIT_PART($tenantid, '.', 1), '%') and tenantid != 'bh.testing'
   groupby: GROUP BY tenantid
   orderby: ORDER BY tenantid, totalamountpaid DESC NULLS LAST
 
@@ -832,7 +832,7 @@ ReportDefinitions:
       LEFT OUTER JOIN egcl_instrumentheader AS ih ON ri.instrumentheader = ih.id and ih.instrumentstatus	 != 'CANCELLED' 
       where rh.status != 'Cancelled'
       ) AS tbl_amounts ON CONCAT(pd.property, ':', pd.assessmentnumber) = tbl_amounts.consumercode 
-      WHERE tenantid LIKE CONCAT(SPLIT_PART($tenantid, '.', 1), '%') and tenantid = $tenantid AND tenantid != 'uk.testing'
+      WHERE tenantid LIKE CONCAT(SPLIT_PART($tenantid, '.', 1), '%') and tenantid = $tenantid AND tenantid != 'bh.testing'
   groupby: GROUP BY tenantid
   orderby: ORDER BY tenantid, totalamountpaid DESC NULLS LAST
 
@@ -953,7 +953,7 @@ ReportDefinitions:
         string_agg(distinct pu.occupancytype, ',') as occupancytype, 
         string_agg(distinct coalesce(usagecategoryminor, usagecategorymajor), ',') as propertytype 
       from eg_pt_unit_v2 as pu
-      where  pu.tenantid = $tenantid AND pu.tenantid != 'uk.testing'
+      where  pu.tenantid = $tenantid AND pu.tenantid != 'bh.testing'
       group by propertydetail
     )
     select 
@@ -984,4 +984,4 @@ ReportDefinitions:
     inner join eg_user as eu on eu.uuid     = po.userid
     inner join eg_pt_address_v2    as pta on pta.property = pt.propertyid
     inner join eg_pt_unit_v2_ot as pot on pot.propertydetail = pd.assessmentnumber
-    where rh.tenantid = $tenantid AND rh.tenantid != 'uk.testing'
+    where rh.tenantid = $tenantid AND rh.tenantid != 'bh.testing'
