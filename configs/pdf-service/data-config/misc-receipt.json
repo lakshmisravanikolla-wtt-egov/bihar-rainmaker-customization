@@ -45,7 +45,7 @@
                   "localisation":{
                     "required":true,
                     "prefix":"BILLINGSERVICE_BUSINESSSERVICE",   
-                    "module":"rainmaker-bpa"
+                    "module":"rainmaker-bpareg"
                  }
                 },
                 {
