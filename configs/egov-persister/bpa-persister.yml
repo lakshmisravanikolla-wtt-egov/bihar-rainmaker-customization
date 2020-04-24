@@ -414,7 +414,7 @@ serviceMaps:
           - jsonPath: $.BPA.owners.*.auditDetails.lastModifiedTime
           
           
-       - query: INSERT INTO eg_bpa_unit(id, tenantId, buildingplanid, blockindex, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id, tenantId, buildingplanid, blockindex) WHERE id IS NOT NULL DO UPDATE SET usageCategory=?, blockIndex=?, additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=?;
+       - query: INSERT INTO eg_bpa_unit(id, tenantId, buildingplanid, usageCategory, blockindex, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id, tenantId, buildingplanid, blockindex) WHERE id IS NOT NULL DO UPDATE SET usageCategory=?, blockIndex=?, additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=?;
          basePath: BPA.units.*
          jsonMaps: 
           - jsonPath: $.BPA.units.*.id
@@ -422,6 +422,8 @@ serviceMaps:
           - jsonPath: $.BPA.units.*.tenantId
 
           - jsonPath: $.BPA.id
+
+          - jsonPath: $.BPA.units.*.usageCategory
 
           - jsonPath: $.BPA.units.*.blockindex
 
@@ -636,7 +638,7 @@ serviceMaps:
           - jsonPath: $.BPA.owners.*.auditDetails.lastModifiedTime
           
                     
-       - query: INSERT INTO eg_bpa_unit(id, tenantId, buildingplanid, blockindex, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id, tenantId, buildingplanid, blockIndex) WHERE id IS NOT NULL DO UPDATE SET usageCategory=?, blockIndex=?, additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=?;
+       - query: INSERT INTO eg_bpa_unit(id, tenantId, buildingplanid, usageCategory, blockindex, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id, tenantId, buildingplanid, blockIndex) WHERE id IS NOT NULL DO UPDATE SET usageCategory=?, blockIndex=?, additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=?;
          basePath: BPA.units.*
          jsonMaps: 
           - jsonPath: $.BPA.units.*.id
@@ -644,6 +646,8 @@ serviceMaps:
           - jsonPath: $.BPA.units.*.tenantId
 
           - jsonPath: $.BPA.id
+
+          - jsonPath: $.BPA.units.*.usageCategory
 
           - jsonPath: $.BPA.units.*.blockindex
 
