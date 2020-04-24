@@ -200,7 +200,8 @@
             [
               {
                 "text": "{{FEE_DSCR}}",
-                "bold": true
+                "bold": true,
+                "alignment": "center"
               },
               {
                 "text": "{{AMOUNT}}",
@@ -210,26 +211,20 @@
             ],
             [
               {
-                "text": "{{appHeadCode}}"
+                "text": "{{appHeadCode}}",
+                "alignment": "center"
               },
               {
                 "text": "{{appFee}}",
                 "alignment": "right"
               }
             ],
-            [
-              {
-                "text": "{{sanHeadCode}}"
-              },
-              {
-                "text": "{{sanFee}}",
-                "alignment": "right"
-              }
-            ],
+            "{{#paymentDetails}}[{ \"text\":\"{{headCode}}\", \"border\":[ true, true, true, true ],\"alignment\": \"center\"},{ \"text\":\"{{amnt}}\", \"border\":[ true, true, true, true ],\"alignment\": \"right\"}]{{/paymentDetails}}",
             [
               {
                 "text": "{{TOTAL}}",
-                "bold": true
+                "bold": true,
+                "alignment": "center"
               },
               {
                 "text": "{{totalDue}}",
