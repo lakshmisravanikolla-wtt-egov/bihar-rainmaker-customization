@@ -578,17 +578,27 @@
                 "apiRequest": null,
                 "responseMapping": [
                   {
-                    "variable": "sanHeadCode",
-                    "value": "$.Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].taxHeadCode",
-                    "localisation": {
-                      "required": true,
-                      "prefix": "BPA",
-                      "module": "rainmaker-bpa"
-                    }
-                  },
-                  {
-                    "variable": "sanFee",
-                    "value": "$.Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                    "variable": "paymentDetails",
+                    "value": "$.Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails.*",
+                    "type" : "array",
+                    "format":{
+                      "type":"string",
+                      "scema":[
+                        {
+                          "variable": "headCode",
+                          "value":"taxHeadCode",
+                          "localisation": {
+                            "required": true,
+                            "prefix": null,
+                            "module": "rainmaker-bpa"
+                          }
+                       },
+                        {
+                          "variable": "amnt",
+                          "value":"amount"
+                        }
+                      ]
+                     }
                   },
                   {
                     "variable": "appHeadCode",
@@ -602,6 +612,14 @@
                   {
                     "variable": "appFee",
                     "value": "$.Payments[1].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                  },
+                  {
+                    "variable" : "totalSancFee",
+                    "value" : "$.Payments[0].paymentDetails[0].bill.billDetails[0].amount"
+                  },
+                  {
+                    "variable" : "totalAppFee",
+                    "value" : "$.Payments[1].paymentDetails[0].bill.billDetails[0].amount"
                   }
                 ]
               },
@@ -623,7 +641,7 @@
             "derived": [
               {
                 "variable": "totalDue",
-                "formula": "{{sanFee}}+{{appFee}}"
+                "formula": "{{totalSancFee}}+{{totalAppFee}}"
               }
             ]
           },
