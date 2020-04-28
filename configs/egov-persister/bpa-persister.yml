@@ -425,7 +425,7 @@ serviceMaps:
 
           - jsonPath: $.BPA.units.*.usageCategory
 
-          - jsonPath: $.BPA.units.*.blockindex
+          - jsonPath: $.BPA.units.*.blockIndex
 
           - jsonPath: $.BPA.units.*.auditDetails.createdBy
 
@@ -649,7 +649,7 @@ serviceMaps:
 
           - jsonPath: $.BPA.units.*.usageCategory
 
-          - jsonPath: $.BPA.units.*.blockindex
+          - jsonPath: $.BPA.units.*.blockIndex
 
           - jsonPath: $.BPA.units.*.auditDetails.createdBy
 
